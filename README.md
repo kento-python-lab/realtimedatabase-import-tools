@@ -9,7 +9,6 @@
 $ csv2json.py
 
 # .env と serviceAccountKey.json の情報を元に RealtimeDatabaseにデータをimport
-# データが多いとかなり時間がかかる
 $ import2firebase.py
 ```
 
