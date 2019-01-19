@@ -40,21 +40,23 @@ def main():
     for json_file_name in listup_files('./output/*'):
         with open(json_file_name, 'r', encoding='utf-8') as f:
             print(f)
+            dict_data = dict()
             for data in json.load(f):
-                import_to_db(data)
+                dict_data[str(ulid.new())] = data
+                print(data)
+
+            import_to_db(dict_data)
 
 
 # 相対パスでCSVファイル一覧を取得
 def listup_files(path):
-    return glob.glob(path)
+    return sorted(glob.glob(path))
 
 # RealtimeDatabaseへのデータ投入処理
 def import_to_db(json_data):
 
     ## add data to database
-    dict_id = ulid.new()
-    users_ref = ref.child(str(dict_id))
-    users_ref.set(json_data)
+    ref.set(json_data)
 
 
 if __name__ == "__main__":
